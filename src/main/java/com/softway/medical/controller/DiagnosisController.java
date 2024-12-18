@@ -23,8 +23,8 @@ public class DiagnosisController {
     @GetMapping("/diagnosis/{index}")
     public ResponseEntity<List<String>> getDiagnosis(@PathVariable int index) {
 
-        List<String> pathologies = diagnosisService.determinePathologies(index);
-        
+        List<String> pathologies = diagnosisService.identifyPathology(index);
+
         return ResponseEntity.ok(pathologies);
     }
 

@@ -23,7 +23,7 @@ public class MedicalApplicationTests {
 
     @Test
     public void testCardiologieOk() {
-        List<String> result = diagnosisService.determinePathologies(27);
+        List<String> result = diagnosisService.identifyPathology(27);
 
         assertEquals(Arrays.asList("Cardiologie"), result);
     }
@@ -31,7 +31,7 @@ public class MedicalApplicationTests {
 
     @Test
     public void testTraumatologieOk() {
-        List<String> result = diagnosisService.determinePathologies(50);
+        List<String> result = diagnosisService.identifyPathology(50);
 
         assertEquals(Arrays.asList("Traumatologie"), result);
     }
@@ -39,7 +39,7 @@ public class MedicalApplicationTests {
 
     @Test
     public void testCardiologieAndTraumatologieOk() {
-        List<String> result = diagnosisService.determinePathologies(15);
+        List<String> result = diagnosisService.identifyPathology(15);
 
         assertEquals(Arrays.asList("Cardiologie", "Traumatologie"), result);
     }
@@ -47,10 +47,10 @@ public class MedicalApplicationTests {
     @Test
     public void testCardiologieAndTraumatologieKo() {
         Exception exception = assertThrows(DiagnosisNotFoundException.class, () -> {
-            diagnosisService.determinePathologies(11);
+            diagnosisService.identifyPathology(11);
         });
 
-        assertEquals("No diagnosis found for health index 11", exception.getMessage());
+        assertEquals("Diagnosis not found", exception.getMessage());
     }
 }
 

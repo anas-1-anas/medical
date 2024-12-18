@@ -17,19 +17,19 @@ public class DiagnosisService implements DiagnosisRepository {
         this.diagnosisRepository = diagnosisRepository;
     }
 
-    public List<String> determinePathologies(int healthIndex) {
+    public List<String> identifyPathology(int index) {
         List<String> pathologies = new ArrayList<>();
 
-        if (healthIndex % 3 == 0) {
+        if (index % 3 == 0) {
             pathologies.add("Cardiologie");
         }
 
-        if (healthIndex % 5 == 0) {
+        if (index % 5 == 0) {
             pathologies.add("Traumatologie");
         }
 
         if (pathologies.isEmpty()) {
-            throw new DiagnosisNotFoundException("No diagnosis found for health index " + healthIndex);
+            throw new DiagnosisNotFoundException("Diagnosis not found");
         }
 
         return pathologies;
