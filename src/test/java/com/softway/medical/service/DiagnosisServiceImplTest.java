@@ -1,8 +1,7 @@
-package com.softway.medical;
-
+package com.softway.medical.service;
 
 import com.softway.medical.exception.DiagnosisNotFoundException;
-import com.softway.medical.service.DiagnosisService;
+import com.softway.medical.service.impl.DiagnosisServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,18 +11,18 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MedicalApplicationTests {
+public class DiagnosisServiceImplTest {
 
-    private DiagnosisService diagnosisService;
+    private DiagnosisServiceImpl diagnosisServiceImpl;
 
     @BeforeEach
     public void setUp() {
-        diagnosisService = new DiagnosisService(null);
+        diagnosisServiceImpl = new DiagnosisServiceImpl();
     }
 
     @Test
     public void testCardiologieOk() {
-        List<String> result = diagnosisService.identifyPathology(27);
+        List<String> result = diagnosisServiceImpl.identifyPathology(27);
 
         assertEquals(Arrays.asList("Cardiologie"), result);
     }
@@ -31,7 +30,7 @@ public class MedicalApplicationTests {
 
     @Test
     public void testTraumatologieOk() {
-        List<String> result = diagnosisService.identifyPathology(50);
+        List<String> result = diagnosisServiceImpl.identifyPathology(50);
 
         assertEquals(Arrays.asList("Traumatologie"), result);
     }
@@ -39,22 +38,19 @@ public class MedicalApplicationTests {
 
     @Test
     public void testCardiologieAndTraumatologieOk() {
-        List<String> result = diagnosisService.identifyPathology(15);
+        List<String> result = diagnosisServiceImpl.identifyPathology(15);
 
-        assertEquals(Arrays.asList("Cardiologie", "Traumatologie"), result);
+        assertEquals(Arrays.asList("Cardiologie Traumatologie"), result);
     }
 
     @Test
     public void testCardiologieAndTraumatologieKo() {
         Exception exception = assertThrows(DiagnosisNotFoundException.class, () -> {
-            diagnosisService.identifyPathology(11);
+            diagnosisServiceImpl.identifyPathology(11);
         });
 
         assertEquals("Diagnosis not found", exception.getMessage());
     }
 }
-
-
-
 
 

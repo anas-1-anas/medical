@@ -2,7 +2,7 @@ package com.softway.medical.controller;
 
 
 import com.softway.medical.exception.DiagnosisNotFoundException;
-import com.softway.medical.service.DiagnosisService;
+import com.softway.medical.service.impl.DiagnosisServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,16 +14,16 @@ import java.util.List;
 @RestController
 public class DiagnosisController {
 
-    private final DiagnosisService diagnosisService;
+    private final DiagnosisServiceImpl diagnosisServiceImpl;
 
-    public DiagnosisController(DiagnosisService diagnosisService) {
-        this.diagnosisService = diagnosisService;
+    public DiagnosisController(DiagnosisServiceImpl diagnosisServiceImpl) {
+        this.diagnosisServiceImpl = diagnosisServiceImpl;
     }
 
     @GetMapping("/diagnosis/{index}")
     public ResponseEntity<List<String>> getDiagnosis(@PathVariable int index) {
 
-        List<String> pathologies = diagnosisService.identifyPathology(index);
+        List<String> pathologies = diagnosisServiceImpl.identifyPathology(index);
 
         return ResponseEntity.ok(pathologies);
     }
